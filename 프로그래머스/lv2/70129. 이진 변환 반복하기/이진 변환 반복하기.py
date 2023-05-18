@@ -1,10 +1,9 @@
 def solution(s):
     cnt, zero, c = 0, 0, 0
-    while 1:
-        if s=="1": break
-        ze = s.count('0')
-        zero+=ze
-        c = len(s)-ze
+    while s!="1":
+        ze = s.count('0')   #단계별 0 개수
+        zero+=ze    #누적 0 개수
+        c = len(s)-ze   #단계별 1 개수
         strr=""
         while c>0:
             strr = str(c%2) + strr
