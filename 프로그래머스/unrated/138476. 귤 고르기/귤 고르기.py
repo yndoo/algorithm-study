@@ -1,5 +1,4 @@
 def solution(k, tangerine):
-    answer = 0
     cnt = {}
     
     for i in set(tangerine):
@@ -13,5 +12,3 @@ def solution(k, tangerine):
     for i,j in enumerate(count):
         k-=j
         if k<=0: return i+1
-    
-    return answer
