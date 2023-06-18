@@ -25,7 +25,6 @@ while cnt<N:
                 if graph[i][j]==2:
                     #폭탄없애기
                     graph[i][j]=0
-                    flag = True
                     for k in range(4):
                         nx = i+dx[k]
                         ny = j+dy[k]
