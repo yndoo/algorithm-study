@@ -1,3 +1,5 @@
+# [벨로그에서 보기](https://velog.io/@kuronuma_daisy/%EB%B0%B1%EC%A4%80Python-20437%EB%B2%88.-%EB%AC%B8%EC%9E%90%EC%97%B4-%EA%B2%8C%EC%9E%842)  
+
 # [Gold V] 문자열 게임 2 - 20437 
 
 [문제 링크](https://www.acmicpc.net/problem/20437) 
