@@ -4,7 +4,7 @@ int main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 	stack<int> s;
-	map<long long, int> m;
+	map<int, int> m;
 	int N;
 	cin >> N; //N 입력받기
 	for (int i = 0; i < N; i++) { //N회 반복
