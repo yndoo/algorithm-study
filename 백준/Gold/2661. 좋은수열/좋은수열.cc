@@ -5,14 +5,10 @@ int N;
 string answer;
 bool flag = false;
 bool check(string numstr) { //인접한 동일 부분 수열이 있는지 체크하는 함수
-	//string numstr = to_string(num);
-	//cout << "numstr : " << numstr << "\n";
 	for (int i = 0; i < numstr.size(); i++) {
 		for (int j = 1; j < numstr.size() - i; j++) {
 			// numstr의 i번째에서 j개 자른 부분수열이 i+j 뒷쪽에 또 있으면 안 됨
 			if (numstr.substr(i+j, j).find(numstr.substr(i, j)) != string::npos) {
-				//cout << numstr.substr(i + j)<<" @\n";
-				//cout << numstr.substr(i, j)<<" &\n";
 				return false;
 			}
 			
@@ -40,9 +36,6 @@ int main() {
 	cin.tie(0);
 	cin >> N;
 	number("1", 1);
-	if (flag) cout << answer; return 0;
-	number("2", 1);
-	number("3", 1);
 	cout << answer;
 	return 0;
 }
