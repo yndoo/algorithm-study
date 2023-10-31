@@ -25,7 +25,7 @@ int main() {
 	int s, e; //각각 올리는 위치, 내리는 위치
 	s = 1; e = N;
 	while (true) {
-		zeroCnt = 0;
+		//zeroCnt = 0;
 		answer++;
 		//벨트 한칸이동
 		s = move(s);
@@ -38,7 +38,7 @@ int main() {
 			else if (belt[next(cur)] > 0 && !visited[next(cur)]) { //이동 가능하면 추가 이동
 				visited[cur] = false;			//현재 위치 로봇 없애주고
 				cur = next(cur);				//이동
-				//if (belt[cur] == 1) zeroCnt++;
+				if (belt[cur] == 1) zeroCnt++;
 				belt[cur]--;					//이동한 곳 내구도 감소
 				if (cur == e) continue;			//이동한 게 내리는 위치면 추가하지 않고 내리기 (로봇 바로 내리기)
 				
@@ -51,7 +51,7 @@ int main() {
 		}
 		//올리는 위치에 로봇 올리기
 		if (belt[s] > 0) {
-			//if (belt[s] == 1) zeroCnt++;
+			if (belt[s] == 1) zeroCnt++;
 			robots.push(s);
 			visited[s] = true;
 			belt[s]--;
@@ -64,9 +64,9 @@ int main() {
 		*/
 
 		//내구도 0인 칸 개수 K개 이상이면 종료
-		for (int i = 1; i <= 2 * N; i++) {
+		/*for (int i = 1; i <= 2 * N; i++) {
 			if (belt[i] == 0)zeroCnt++;
-		}
+		}*/
 		if (zeroCnt >= K) break;
 	}
 	cout << answer;
