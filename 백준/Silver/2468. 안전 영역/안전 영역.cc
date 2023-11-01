@@ -30,7 +30,7 @@ int main() {
 		high = max(high, *max_element(&graph[i][0], &graph[i][N]));
 		low = min(low, *min_element(&graph[i][0], &graph[i][N]));
 	}
-	//low ~ high 사이의 높이별로 bfs
+	//low ~ high 사이의 높이별로 dfs
 	for (int k = low - 1; k < high; k++) {
 		fill(&visited[0][0], &visited[99][100], false);
 		//dfs돌리기
