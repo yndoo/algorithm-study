@@ -1,60 +1,54 @@
-#include <iostream>
+#include<iostream>
+#include<queue>
+#include<vector>
 #include<string>
-#include<algorithm>
-#include<set>
 using namespace std;
-int N, M;
-struct compare {
-	bool operator()(pair<int, int> a, pair<int, int> b) const{
-		if (a.second == b.second) { //난이도가 같으면 번호 큰게 뒤로가야함
-			return a.first < b.first;
-		}
-		return a.second < b.second;
-	}
-};
-
+priority_queue<pair<int, int>, vector<pair<int, int>>> maxPQ; //{난이도, 문제 번호} first가 같으면 second도 큰 순으로
+priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minPQ; //first가 같으면 second도 작은 순
+priority_queue<int, vector<int>> maxTrash;
+priority_queue<int, vector<int>, greater<int>> minTrash;
+int N, M, P, L;
+string command;
 int main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
-	int P, L;
-	int num, p, l;
-	string command;
-	set<pair<int, int>, compare> s;
-	set<int> trash;
 	cin >> N;
 	for (int i = 0; i < N; i++) {
 		cin >> P >> L;
-		s.insert({ P, L }); //문제 번호, 난이도
+		maxPQ.push({ L, P });
+		minPQ.push({ L, P });
 	}
 	cin >> M;
 	for (int i = 0; i < M; i++) {
 		cin >> command;
-		if (command == "recommend") {
-			cin >> num;
-			if (num == 1) {
-				while (!trash.empty() && (*--s.end()).first == *--trash.end()) {
-					trash.erase(--trash.end());
-					s.erase(--s.end());
-				}
-				cout << (*--s.end()).first << "\n";
-			}
-			else if (num == -1) {
-				while (!trash.empty() && (*s.begin()).first == *trash.begin()) {
-					trash.erase(trash.begin());
-					s.erase(s.begin());
-				}
-				cout << (*s.begin()).first << "\n";
-			}
+		if (command == "add") {
+			cin >> P >> L;
+			maxPQ.push({ L, P });
+			minPQ.push({ L, P });
 		}
-		else if (command == "add") {
-			cin >> p >> l;
-			s.insert({ p, l });
+		else if (command == "recommend") {
+			int num;
+			cin >> num;
+			if (num == 1) { //가장 어려운 문제 추천
+				while (!maxTrash.empty() && maxTrash.top() == maxPQ.top().second) {
+					maxTrash.pop();
+					maxPQ.pop();
+				}
+				cout << maxPQ.top().second << "\n";
+			}
+			else if (num == -1) { //가장 쉬운 문제 추천
+				while (!minTrash.empty() && minTrash.top() == minPQ.top().second) {
+					minTrash.pop();
+					minPQ.pop();
+				}
+				cout << minPQ.top().second << "\n";
+			}
 		}
 		else if (command == "solved") {
-			cin >> p;
-			trash.insert(p);
+			cin >> P;
+			maxTrash.push(P);
+			minTrash.push(P);
 		}
-
 	}
 	return 0;
 }
