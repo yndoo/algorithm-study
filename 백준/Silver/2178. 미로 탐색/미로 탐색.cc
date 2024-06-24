@@ -1,37 +1,51 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <queue>
 
-using namespace std;
+int main()
+{
+	int N, M;
+	int graph[100][100] = { 0, };
+	int visited[100][100] = { 0, };
+	std::queue<std::pair<int, int>> Q;
 
-string graph[101];
+	int dx[4] = { 0, 0, -1, 1 };
+	int dy[4] = { 1,-1,0,0 };
 
-int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    int N,M;
-    int visited[101][101];
-    int dx[4] = {1,-1,0,0};
-    int dy[4] = {0,0,1,-1};
-    cin>>N>>M;
-    for(int i=0; i<N; i++){
-        cin>>graph[i];
-    }    
-    for(int i=0; i<N; i++)
-        fill(visited[i],visited[i]+M,0);
-    queue<pair<int,int>> q;
-    q.push({0,0});
-    visited[0][0]=1;
-    while(!q.empty()){
-        auto cur = q.front(); q.pop();
-        for(int i=0; i<4; i++){
-            int nx,ny;
-            nx = cur.first + dx[i];
-            ny = cur.second + dy[i];
-            if(nx<0 || ny<0 || nx>=N || ny>=M) continue;
-            if (visited[nx][ny]!=0 || graph[nx][ny]=='0') continue;
-            visited[nx][ny]= visited[cur.first][cur.second]+1;
-            q.push({nx,ny});
-        }
-    }
-    cout<<visited[N-1][M-1];
-    return 0;
+
+	std::cin >> N >> M;
+
+	for (int i = 0; i < N; ++i)
+	{
+		std::string row;
+		std::cin >> row;
+
+		for (int j = 0; j < M; ++j)
+		{
+			if (row[j] == '1')
+			{
+				graph[i][j] = 1;
+			}
+		}
+	}
+
+	Q.push(std::make_pair(0, 0));
+	visited[0][0] = 1;
+	while (!Q.empty())
+	{
+		int x = Q.front().first;
+		int y = Q.front().second;
+		Q.pop();
+		for (int dir = 0; dir < 4; ++dir)
+		{
+			int nx = x + dx[dir];
+			int ny = y + dy[dir];
+			if (0 == graph[nx][ny] || 0 < visited[nx][ny] || nx < 0 || nx >= N || ny < 0 || ny >= M) continue;
+			Q.push(std::make_pair(nx, ny));
+			visited[nx][ny] = visited[x][y] + 1;
+		}
+	}
+
+
+	std::cout << visited[N - 1][M - 1];
+	return 0;
 }
